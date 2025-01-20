@@ -1,6 +1,11 @@
 @JwtAuthService_HostAddress = http://localhost:5146
 
-GET {{JwtAuthService_HostAddress}}/weatherforecast/
+POST {{JwtAuthService_HostAddress}}/auth/login/
 Accept: application/json
+Content-Type: application/json
 
+{
+"Username" : "Mike",
+"Password" : "123"
+}
 ###
