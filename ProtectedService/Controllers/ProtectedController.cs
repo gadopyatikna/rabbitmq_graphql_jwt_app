@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JwtAuthService.Controllers;
+namespace ProtectedService.Controllers;
 
 [ApiController]
 [Route("[controller]")]
