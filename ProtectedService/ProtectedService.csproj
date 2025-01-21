@@ -14,5 +14,9 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RabbitMqConsumer\RabbitMqConsumer.csproj" />
+  </ItemGroup>
   
 </Project>

@@ -58,6 +58,8 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddHostedService<RabbitMqConsumer.RabbitMqConsumer>();
+
 var app = builder.Build();
 app.UseSwagger();  // Enable Swagger
 app.UseSwaggerUI();  // Enable Swagger UI

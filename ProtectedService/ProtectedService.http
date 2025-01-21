@@ -1,6 +1,17 @@
 @ProtectedService_HostAddress = http://localhost:5147
 
-GET {{ProtectedService_HostAddress}}/Protected//
+GET {{ProtectedService_HostAddress}}/Protected/protected
+Accept: application/json
+Authorization: Bearer ""
+
+###
+GET {{ProtectedService_HostAddress}}/Streaming/stream
 Accept: application/json
 
 ###
+GET {{ProtectedService_HostAddress}}/Streaming/dynamic-stream
+Accept: application/json
+
+###
+GET {{ProtectedService_HostAddress}}/Streaming/dataset
+Accept: application/json

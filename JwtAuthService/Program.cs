@@ -1,9 +1,5 @@
 using JwtAuthService.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.OpenApi.Models;
 
 IdentityModelEventSource.ShowPII = true;
 var builder = WebApplication.CreateBuilder(args);
