@@ -5,10 +5,17 @@ using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
 
 IdentityModelEventSource.ShowPII = true;
-var builder = WebApplication.CreateBuilder(args);
 
 // Secret key for JWT
 var secretKey = "my-very-long-token-suoer-puper-secret-key";
+
+var builder = WebApplication.CreateBuilder(args);
+
+var rabbitMqHost = builder.Configuration.GetValue<string>("RabbitMqHost", "localhost");
+var queueName = builder.Configuration.GetValue<string>("QueueName", "task_queue");
+
+// Add HostedService with parameters passed in the constructor
+builder.Services.AddHostedService(sp => new RabbitMqConsumer.RabbitMqConsumer(rabbitMqHost, queueName));
 
 // Add JWT authentication
 builder.Services.AddAuthentication(options =>
