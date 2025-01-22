@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 using System.Text;
+using Microsoft.Extensions.Options;
+using ProtectedService.Configs;
 
 namespace ProtectedService.Controllers
 {
@@ -8,9 +10,15 @@ namespace ProtectedService.Controllers
     [ApiController]
     public class RabbitMqController : ControllerBase
     {
-        private readonly string _rabbitMqHost = "localhost";  // RabbitMQ host
-        private readonly string _queueName = "task_queue";   // Queue name
+        private readonly string _rabbitMqHost;
+        private readonly string _queueName;
 
+        public RabbitMqController(IOptions<RabbitMqConfig>  config)
+        {
+            _rabbitMqHost = config?.Value?.RabbitMqHost ?? "localhost";
+            _queueName = config?.Value?.QueueName ?? "task_queue";
+        }
+        
         // POST api/rabbitmq/send
         [HttpPost("send")]
         public async Task<IActionResult> SendMessage([FromBody] string message)

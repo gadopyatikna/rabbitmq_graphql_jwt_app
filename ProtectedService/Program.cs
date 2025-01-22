@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
+using ProtectedService.Configs;
 
 IdentityModelEventSource.ShowPII = true;
 
@@ -13,6 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var rabbitMqHost = builder.Configuration.GetValue<string>("RabbitMqHost", "localhost");
 var queueName = builder.Configuration.GetValue<string>("QueueName", "task_queue");
+
+builder.Services.Configure<RabbitMqConfig>(_ => new RabbitMqConfig() { RabbitMqHost = rabbitMqHost, QueueName = queueName});
 
 // Add HostedService with parameters passed in the constructor
 builder.Services.AddHostedService(sp => new RabbitMqConsumer.RabbitMqConsumer(rabbitMqHost, queueName));
