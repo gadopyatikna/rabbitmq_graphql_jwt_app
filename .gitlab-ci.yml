@@ -18,13 +18,11 @@ test:
     - docker pull rabbitmq:management
     - docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
     - echo "Running JwtAuthService"
-    - cd JwtAuthService
-    - docker build -t your-auth-service .
+    - docker build -t your-auth-service JwtAuthService/
     - docker run -d -p 5146:5146 --name auth-service-container your-auth-service
-    - cd ..
     - echo "Running ProtectedService"
     - cd ProtectedService
-    - docker build -t your-protected-service .
+    - docker build -t protected-service -f ProtectedService/Dockerfile .
     - docker run -d -p 5147:5147 --name protected-service-container protected-service
 
 deploy:

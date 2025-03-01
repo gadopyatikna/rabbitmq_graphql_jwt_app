@@ -21,7 +21,7 @@ COPY . .
 COPY ../RabbitMqConsumer/ ./RabbitMqConsumer/
 
 # Build and publish the ProtectedService project
-RUN dotnet publish ./ProtectedService/ProtectedService.csproj -c Release -o /app/out/protectedservice
+RUN dotnet publish ./ProtectedService/ProtectedService.csproj -c Release -o /protected_svc/out/protectedservice
 
 # Use the official .NET runtime image for running the application
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
@@ -30,7 +30,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /protected_svc
 
 # Copy the built application for ProtectedService
-COPY --from=build /app/out/protectedservice /app/protectedservice
+COPY --from=build /protected_svc/out/protectedservice .
 
 # Expose the port your app will run on (for web apps, usually 80 or 5000)
 EXPOSE 5146
