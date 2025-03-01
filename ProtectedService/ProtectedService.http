@@ -15,3 +15,7 @@ Accept: application/json
 ###
 GET {{ProtectedService_HostAddress}}/Streaming/dataset
 Accept: application/json
+
+###
+GET {{ProtectedService_HostAddress}}/api/RabbitMq/dataset
+Accept: application/json

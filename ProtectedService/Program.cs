@@ -69,6 +69,10 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddHostedService<RabbitMqConsumer.RabbitMqConsumer>();
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(5147); // This binds to 0.0.0.0:5147
+});
 
 var app = builder.Build();
 app.UseSwagger();  // Enable Swagger
