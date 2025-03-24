@@ -35,5 +35,7 @@ COPY --from=build /protected_svc/out/protectedservice .
 # Expose the port your app will run on (for web apps, usually 80 or 5000)
 EXPOSE 5146
 
+ENV DOTNET_ENVIRONMENT=Docker
+
 # Define the entry point to run the application
 ENTRYPOINT ["dotnet", "ProtectedService.dll"]

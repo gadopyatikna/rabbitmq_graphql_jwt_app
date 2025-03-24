@@ -11,9 +11,8 @@ IdentityModelEventSource.ShowPII = true;
 var secretKey = "my-very-long-token-suoer-puper-secret-key";
 
 var builder = WebApplication.CreateBuilder(args);
-
-var rabbitMqHost = builder.Configuration.GetValue<string>("RabbitMqHost", "localhost");
-var queueName = builder.Configuration.GetValue<string>("QueueName", "task_queue");
+var rabbitMqHost = builder.Configuration.GetValue<string>("RabbitMqHost");
+var queueName = builder.Configuration.GetValue<string>("QueueName");
 
 builder.Services.Configure<RabbitMqConfig>(_ => new RabbitMqConfig() { RabbitMqHost = rabbitMqHost, QueueName = queueName});
 
@@ -41,7 +40,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-// Add Swagger services
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -68,17 +67,10 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddHostedService<RabbitMqConsumer.RabbitMqConsumer>();
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.ListenAnyIP(5147); // This binds to 0.0.0.0:5147
-});
-
 var app = builder.Build();
-app.UseSwagger();  // Enable Swagger
-app.UseSwaggerUI();  // Enable Swagger UI
+app.UseSwagger();  
+app.UseSwaggerUI();  
 
-// Use authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
 

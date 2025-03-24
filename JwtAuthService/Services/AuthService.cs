@@ -8,7 +8,7 @@ namespace JwtAuthService.Services;
 
 public class AuthService
 {
-    private readonly List<User> _users = new(); // In-memory user store
+    private readonly List<User> _users = new();
 
     private readonly string _key;
 

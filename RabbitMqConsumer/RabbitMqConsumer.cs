@@ -19,9 +19,7 @@ namespace RabbitMqConsumer
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var factory = new ConnectionFactory() { HostName = "host.docker.internal", Port = 5672 };
-
-//          var factory = new ConnectionFactory() { HostName = _rabbitMqHost };
+            var factory = new ConnectionFactory() { HostName = _rabbitMqHost };
 
             var connection = await factory.CreateConnectionAsync();
             var channel = await connection.CreateChannelAsync();
