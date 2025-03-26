@@ -15,16 +15,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 // Add Swagger services
 builder.Services.AddSwaggerGen();
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.ListenAnyIP(5146); // This binds to 0.0.0.0:5146
-});
-    
 var app = builder.Build();
 app.UseSwagger();  // Enable Swagger
 app.UseSwaggerUI();  // Enable Swagger UI
 
-// Use authentication and authorization
+
 app.UseAuthentication();
 app.UseAuthorization();
 
